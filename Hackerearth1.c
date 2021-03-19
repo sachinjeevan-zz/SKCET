@@ -161,7 +161,7 @@ long long int extractMax(struct BHeap* heap,long long int parent)
 
         extractMax(heap,max);
     }
-    else if(heap->arr[parent] < heap->arr[max])
+    else if(heap->arr[parent] == heap->arr[max])
     {
         if(heap->id[parent] < heap->id[max])
         {
