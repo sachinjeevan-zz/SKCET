@@ -52,6 +52,33 @@ int extractMin(struct BHeap* heap,int parent)
         return heap->arr[heap->n];
     }
 }
+void heapify(struct BHeap* heap,int parent)
+{
+     int left = parent*2+1,right = parent*2+2;
+     int min;
+     if(left < heap->n && right< heap->n)
+     {
+         min = heap->arr[left] < heap->arr[right]? left : right;
+     }
+     else if(left < heap->n)
+     {
+         min = left;
+     }
+     else{
+         return;
+     }
+         if(heap->arr[parent] > heap->arr[min])
+         {
+             int temp = heap->arr[parent];
+             heap->arr[parent] = heap->arr[min];
+             heap->arr[min] = temp;
+             heapify(heap, min);
+         }
+         else{
+             return;
+         }
+     
+}
 int main()
 {
     struct BHeap heap;
@@ -64,20 +91,16 @@ int main()
         scanf("%d",&x);
         heap.arr[i] = x;
         heap.n += 1;
-        BinaryHeap(&heap,i,(i-1)/2);
+    }
+    for(int i=heap.n-1;i>=0;i--)
+    {
+        heapify(&heap,i);
     }
 
     for(int i=0;i<heap.n;i++)
     {
         printf("%d ",heap.arr[i]);
     }
-    while(heap.n>0)
-    {
-    int ans = extractMin(&heap,0);
-    }
-     for(int i=0;i<heap.size;i++)
-    {
-        printf("%d ",heap.arr[i]);
-    }
+    
 
 }
